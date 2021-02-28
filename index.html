@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rock-paper-scissors</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <section>
+
+
+        <input type="radio" id="number5" name="rounds" value="5" onchange="chooseRound()" checked>
+        <label for="number5">5</label><br>
+
+        <input type="radio" id="number10" name="rounds" value="10" onchange="chooseRound()" checked>
+        <label for="number10">10</label><br>
+
+        <input type="radio" id="number15" name="rounds" value="15" onchange="chooseRound()" checked>
+        <label for="number15">15</label><br>
+
+        <input type="radio" id="number20" name="rounds" value="20" onchange="chooseRound()" checked>
+        <label for="number20">20</label><br>
+        <button type="button" onclick="start()">Play</button>
+
+
+    </section>
+    <div id="round-container">
+        <span id="round">0</span> / <span id="roundTotal">0</span>
+    </div>
+    <div class="scoreBoard">
+        <div id="userLabel">user: <span id="userScore">0</span></div>
+        <div id="computer-label">comp: <span id="computerScore">0</span></div>
+    </div>
+
+    <section class="choices" id="container">
+        <div id="rock" class="choice ">
+            <img src="assets/img/1.png" />
+        </div>
+        <div id="paper" class="choice">
+            <img src="assets/img/3.png" />
+        </div>
+        <div id="scissors" class="choice">
+            <img src="assets/img/2.png" />
+        </div>
+        <p id="message">Make your move.</p>
+        <button id="reload" onclick="reload()">Restart</button>
+        </p>
+    </section>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

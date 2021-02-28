@@ -1,0 +1,9 @@
+img{
+    height: 20vh;
+}
+.choices{
+    display: none;
+}
+#round-container{
+    display: none; 
+}
