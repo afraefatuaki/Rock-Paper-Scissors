@@ -34,8 +34,10 @@ function chooseRound() {
     } else if (number20.checked) {
         total = 20
     }
-
 }
+
+chooseRound()
+
 //let chosenRounds = chooseRound()
 
 //Computer Choice
@@ -47,17 +49,14 @@ function computerChoice() {
 //User choice
 rock.addEventListener('click', (e) => {
     play("rock")
-
 });
 
 paper.addEventListener('click', (e) => {
     play("paper")
-
 });
 
 scissors.addEventListener('click', (e) => {
     play("scissors")
-
 });
 
 
@@ -80,15 +79,15 @@ function compare(userChoice, computerChoice) {
     }
 }
 
+
 let play = (choice) => {
-    if (counting < total) {
-        counting++
+    counting++
+    if (counting <= total) {
         let computer = handSign[computerChoice()]
         console.log(compare(choice, computer))
         round.innerHTML = counting
 
-
-    } else {
+    } else if (counting == total) {
         console.log("restart")
     }
 
