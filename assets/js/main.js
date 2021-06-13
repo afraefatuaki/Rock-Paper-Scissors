@@ -1,67 +1,34 @@
-const number5 = document.getElementById('number5');
-const number10 = document.getElementById('number10');
-const number15 = document.getElementById('number15');
-const number20 = document.getElementById('number20');
-const rock = document.getElementById('rock')
-const paper = document.getElementById('paper')
-const scissors = document.getElementById('scissors')
-let round = document.getElementById('round')
-let roundTotal = document.getElementById('roundTotal')
-let roundContainer = document.getElementById('round-container')
-let message = document.getElementById('message')
-let userScore = document.getElementById('userScore')
-let computerScore = document.getElementById('computerScore')
-userScore = 0
-computerScore = 0
+const rock = document.getElementById("rock")
+const paper = document.getElementById("paper")
+const scissors = document.getElementById("scissors")
+const radio = document.getElementsByName('radio')
+const result = document.getElementById('result')
+const container = document.getElementById('container')
+const roundContainer = document.getElementById('round-container')
+const round = document.getElementById('round')
+const roundTotalDiv = document.getElementById('round-total')
+const userScoreDiv = document.getElementById('user-score')
+const computerScoreDiv = document.getElementById('computer-score')
+const choices = document.querySelectorAll('.choice')
+let roundTotal = 5
+let counter = 0
+let userScore = 0
+let computerScore = 0
 
+choices.forEach(choice => choice.addEventListener('click', (e) => game(e.path[1].id)))
+// rock.addEventListener('click', () => {
+//     game('rock');
+// })
+// paper.addEventListener('click', () => {
+//     game('paper');
+// })
+// scissors.addEventListener('click', () => {
+//     game('scissors');
+// })
 
+let getComputerChoice = () => ['rock', 'paper', 'scissors'][Math.floor(Math.random() * 3)]
+//console.log(getComputerChoice())
 
-let user;
-let total;
-let counting = 0;
-let handSign = ['rock', 'paper', 'scissors']
-
-
-//Choose rounds
-function chooseRound() {
-
-    if (number5.checked) {
-        total = 5
-    } else if (number10.checked) {
-        total = 10
-    } else if (number15.checked) {
-        total = 15
-    } else if (number20.checked) {
-        total = 20
-    }
-}
-
-chooseRound()
-
-//let chosenRounds = chooseRound()
-
-//Computer Choice
-function computerChoice() {
-    return Math.floor(Math.random() * Math.floor(3));
-}
-
-
-//User choice
-rock.addEventListener('click', (e) => {
-    play("rock")
-});
-
-paper.addEventListener('click', (e) => {
-    play("paper")
-});
-
-scissors.addEventListener('click', (e) => {
-    play("scissors")
-});
-
-
-
-//comparing the choices 
 function compare(userChoice, computerChoice) {
     switch (userChoice + computerChoice) {
         case 'rockrock':
@@ -79,42 +46,46 @@ function compare(userChoice, computerChoice) {
     }
 }
 
+let getScore = text => text == 'win' ? userScore++ : text == 'lose' ? computerScore++ : null
+let getGeneralScore = (userScore, computerScore) => userScore > computerScore ? '!!you win' : userScore < computerScore ? '!!LOOOOOSer' : "!!It's a draw"
 
-let play = (choice) => {
-    counting++
-    if (counting <= total) {
-        let computer = handSign[computerChoice()]
-        console.log(compare(choice, computer))
-        round.innerHTML = counting
+radio.forEach(elt => elt.addEventListener('click', () => roundTotal = elt.value))
 
-    } else if (counting == total) {
-        console.log("restart")
+let game = (userChoice) => {
+    container.style.display = 'none'
+    roundContainer.style.display = 'block'
+    roundTotalDiv.innerHTML = roundTotal
+    let computerChoice = getComputerChoice()
+    console.log({ counter, userChoice, computerChoice })
+    if (counter < roundTotal) {
+        counter++
+        round.innerHTML = counter
+        result.innerHTML = compare(userChoice, computerChoice)
+        getScore(compare(userChoice, computerChoice))
+        userScoreDiv.innerHTML = userScore
+        computerScoreDiv.innerHTML = computerScore
+        console.log({ userScore, computerScore })
     }
-
-}
-
-function whoWins(userChoice, computerChoice) {
-    if (userScore < computerScore) {
-        message.innerHTML("You lost! Never give up!")
-        console.log(computerScore++)
-    } else if (userScore > computerScore) {
-        message.innerHTML("You won me!!!! Congrats.")
-        console.log(userScore++)
-    } else {
-        message.innerHTML("It's a draw! We must keep trying!")
+    if (counter == roundTotal) {
+        console.log('result')
+        result.innerHTML = getGeneralScore(userScore, computerScore)
     }
 }
 
+var start = millis();
 
-function start() {
-    document.getElementById("container").style.display = "block";
-    roundContainer.style.display = "block"
-    roundTotal.innerHTML = total
+mouseClicked = function () {
+    // Restart the program whenever the user clicks the mouse
+    Program.restart();
+};
 
-}
-function reload() {
-    window.location.reload();
-}
+draw = function () {
+    background(255, 255, 255);
+    fill(0, 0, 0);
+    textAlign(CENTER, CENTER);
+    text("This program has been running for " + ((millis() - start) / 1000).toFixed(2) + " seconds.", 200, 200);
+};
+
 
 
 
